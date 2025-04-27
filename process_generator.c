@@ -1,20 +1,20 @@
 #include "headers.h"
 
-void clearResources(int);
-
-
 struct Process_Param {
     int Arrival_Time;
     int runtime;
     int Priority;
 } typedef Process_Param;
 
+Process_Param* Processes;
+void clearResources(int);
+
 int main(int argc, char * argv[])
 {
     signal(SIGINT, clearResources);
     // TODO Initialization
-    int Num_of_Processes; // Input from file
-    Process_Param* Processes = malloc(sizeof(Process_Param)*Num_of_Processes); // for nourhan use this
+     int Num_of_Processes = 0; // Input from file
+     Processes = malloc(sizeof(Process_Param)*Num_of_Processes); // for nourhan use this
 
     //Nourhan Begin
     //For nourhann , when doing the input the data into an array of Process_Param -Amir
@@ -48,7 +48,7 @@ int main(int argc, char * argv[])
     int index = 0;
     Process_Param nextProcess = Processes[index];
     while (index < Num_of_Processes) {
-        int Time = getClk();
+         Time = getClk();
         if (Time>=nextProcess.Arrival_Time) {
             // implement message queue send process to sched
             nextProcess = Processes[++index];
@@ -61,12 +61,14 @@ int main(int argc, char * argv[])
     // 6. Send the information to the scheduler at the appropriate time.
     // 7. Clear clock resources
     //Amir End
-   destroyClk(true);
+    clearResources(0);
+    destroyClk(true);
 }
 
 void clearResources(int signum)
 {
     //Amir Begin
+    free(Processes);
     //TODO Clears all resources in case of interruption
     //Amir End
 }
