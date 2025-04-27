@@ -3,6 +3,7 @@
 
 int main(int argc, char * argv[])
 {
+
     initClk();
     
     //TODO implement the scheduler     :)
@@ -48,5 +49,5 @@ int main(int argc, char * argv[])
 
     //upon termination release the clock resources.
     
-    destroyClk(true);
+   // destroyClk(true);
 }
